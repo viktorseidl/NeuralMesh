@@ -121,3 +121,192 @@ For L = 5, f_l = 0.01, |C_0| = 10⁷, |T_5| = 10:
 ≈ 10 + 10^-3
 ≈ 10
 ```
+
+**Result**: The cumulative false-positive rate remains manageable.
+
+---
+
+## 4. IPv6 Prefix Encoding
+
+### 4.1 Address Structure
+
+| Global Routing Prefix | Area | Domain | Sub-Domain | Expert |
+|-------|------|------|------|------|
+| (48 Bit) | (16 B) | (16 Bit) | (16 Bit) | (32 Bit) |
+
+
+### 4.2 Hashing
+
+Each level hashes the prefix of the next level:
+
+Level 1: hash(area_prefix)
+Level 2: hash(domain_prefix)
+Level 3: hash(subdomain_prefix)
+Level 4: hash(expert_id)
+Level 5: hash(metadata)
+
+
+### 4.3 Expand Function
+
+The `expand(c)` function returns the child prefixes of c:
+
+```
+expand(2001:db8:physics::/48) → {
+2001:db8:physics:acoustics::/64,
+2001:db8:physics:optics::/64,
+...
+}
+```
+
+
+---
+
+## 5. Multicast Discovery
+
+### 5.1 Multicast Groups
+
+Each area/domain/subdomain has a multicast group:
+
+```
+ff0e:2001:db8:physics:acoustics::1
+```
+
+### 5.2 Registration
+
+Experts register to their group via MLD (Multicast Listener Discovery):
+
+```
+Multicast: ff0e:2001:db8:physics:acoustics::1
+Payload: {query: "...", nonce: "..."}
+```
+
+### 5.4 Response
+
+Experts respond via unicast:
+
+```
+Unicast: 2001:db8:expert::1
+Payload: {response: "...", nonce: "...", signature: "..."}
+```
+
+---
+
+## 6. Anycast Load Balancing
+
+### 6.1 Anycast Address
+
+Popular experts share an anycast address:
+
+```
+2001:db8:physics:acoustics:popular::1
+```
+
+### 6.2 Routing
+
+BGP routes to the nearest instance:
+
+```
+AS1 → AS2 → AS3 (nearest)
+```
+
+### 6.3 Failover
+
+If an instance fails, BGP withdraws the route:
+
+```
+Withdraw: 2001:db8:physics:acoustics:popular::1
+```
+
+Traffic is rerouted to the next-nearest instance.
+
+---
+
+## 7. Caching
+
+### 7.1 Semantic Cache
+
+The Router LLM maintains a semantic cache:
+
+```
+Key: embedding(query)
+Value: {prefixes: [...], timestamp: ...}
+```
+
+### 7.2 Exact Cache
+
+The Aggregator LLM maintains an exact cache:
+
+```
+Key: hash(query, expert_set)
+Value: {response: "...", timestamp: ...}
+```
+
+### 7.3 Cache Invalidation
+
+Caches are invalidated:
+
+- **Time-based**: After T seconds
+- **Event-based**: When experts change
+- **Manual**: Via admin API
+
+---
+
+## 8. Performance
+
+### 8.1 Latency Breakdown
+
+| Component | Latency |
+|-----------|---------|
+| Router LLM | 100–500 ms |
+| Bloom filter (5 levels) | ~500 ns |
+| Multicast roundtrip | 10–100 ms |
+| Expert inference | 100–1000 ms |
+| Aggregator LLM | 200–1000 ms |
+| **Total** | **~500–2500 ms** |
+
+### 8.2 Throughput
+
+| Metric | Value |
+|--------|-------|
+| Queries/second (single router) | ~100 |
+| Queries/second (federated) | ~10,000 |
+| Experts addressable | 10¹²+ |
+| Bloom-filter memory | 625 MB |
+
+---
+
+## 9. Security
+
+### 9.1 Sybil Resistance
+
+- **Proof-of-stake**: Experts stake tokens
+- **Proof-of-reputation**: Experts build reputation over time
+- **Proof-of-work**: Experts solve puzzles (expensive)
+
+### 9.2 Malicious Experts
+
+- **Reputation**: Low-reputation experts are deprioritized
+- **Sandboxing**: Docker containers with restricted capabilities
+- **Verification**: Multi-LLM consensus for critical queries
+
+### 9.3 Eclipse Attacks
+
+- **Diverse peers**: Experts connect to diverse peers
+- **Random routing**: Some queries routed randomly
+- **Monitoring**: Anomaly detection
+
+---
+
+## 10. Future Work
+
+- **Federated routing**: Multiple routers
+- **Adaptive Bloom filters**: Dynamic resizing
+- **Learned Bloom filters**: Combining Bloom with ML
+- **Cross-area routing**: Routing between areas
+- **Standardization**: IETF proposal
+
+---
+
+## References
+
+See `README.md` for the full reference list.
