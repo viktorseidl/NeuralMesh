@@ -2,7 +2,7 @@
 
 **Version**: 0.1.0
 **Status**: Draft
-**Last Updated**: [Date]
+**Last Updated**: 30.09.2026
 
 ---
 
@@ -84,16 +84,18 @@ This is impractical. Instead, we partition into **levels** of 10⁷ elements eac
 
 ### 3.2 Hierarchy
 
+```
 Level 1: Area prefixes (10⁷ entries, 12.5 MB, 0.8% FP)
 Level 2: Domain prefixes (10⁷ entries, 12.5 MB, 0.8% FP)
 Level 3: Sub-domain prefixes(10⁷ entries, 12.5 MB, 0.8% FP)
 Level 4: Expert IDs (10⁷ entries, 12.5 MB, 0.8% FP)
 Level 5: Metadata (10⁷ entries, 12.5 MB, 0.8% FP)
+```
 
 ### 3.3 Routing Algorithm
 
-Input: query q, hierarchy H = {B_1, ..., B_L}
-Output: candidate set C
+Input: ```query q, hierarchy H = {B_1, ..., B_L}```
+Output: ```candidate set C```
 
 ```
 1: C ← {all area prefixes}
@@ -138,13 +140,13 @@ For L = 5, f_l = 0.01, |C_0| = 10⁷, |T_5| = 10:
 ### 4.2 Hashing
 
 Each level hashes the prefix of the next level:
-
+```
 Level 1: hash(area_prefix)
 Level 2: hash(domain_prefix)
 Level 3: hash(subdomain_prefix)
 Level 4: hash(expert_id)
 Level 5: hash(metadata)
-
+```
 
 ### 4.3 Expand Function
 
