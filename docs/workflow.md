@@ -116,7 +116,7 @@
 │              LAYER 3: 2B EXPERTS (PARALLEL EXECUTION)               │
 │                                                                     │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐               │
-│  │ Expert 001   │  │ Expert 045   │  │ Expert 089   │               │
+│  │ Expert 001    │  │ Expert 045   │  │ Expert 089   │               │
 │  │ (Ultrasound) │  │ (Pitch)      │  │ (Spectral)   │               │
 │  │              │  │              │  │              │               │
 │  │ ┌──────────┐ │  │ ┌──────────┐ │  │ ┌──────────┐ │               │
