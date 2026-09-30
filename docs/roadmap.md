@@ -215,8 +215,8 @@ See `README.md` for details.
 
 | Milestone | Target Date | Status |
 |-----------|-------------|--------|
-| Concept paper | [Date] | ✅ |
-| GitHub repo | [Date] | ⏳ |
+| Concept paper | 30.09.2026 | ✅ |
+| GitHub repo | 30.09.2026 | ⏳ |
 | First collaborator | [Date] | ⏳ |
 | Prototype | [Date] | ⏳ |
 | First paper | [Date] | ⏳ |
