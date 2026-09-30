@@ -236,6 +236,7 @@ This project is **too big for one person**. I am looking for **volunteers** who 
 | Document | Description |
 |----------|-------------|
 | [Concept Paper](docs/concept.md) | Detailed technical description |
+| [Workflow-Concept](docs/workflow.md) | Frequently asked questions |
 | [Architecture](docs/architecture.md) | Detailed system architecture |
 | [Routing](docs/routing.md) | Bloom-filter routing in detail |
 | [IPv6 Schema](docs/ipv6-schema.md) | Addressing hierarchy |
