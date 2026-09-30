@@ -228,8 +228,7 @@ See `README.md` for details.
 ## Contact
 
 - **GitHub Issues**: for technical discussions
-- **Discussion Forum**: [insert link]
-- **Email**: [insert email]
+- **Email**: viktorseidl@gmail.com
 
 ---
 
