@@ -75,3 +75,66 @@ An **Aggregator LLM** combines expert responses into a coherent answer. Like the
 ### 3.4 IPv6 as Routing Hierarchy
 
 IPv6 addresses are structured hierarchically:
+
+```
+| Global Routing Prefix | Area | Domain | Sub-Domain | Expert |
+```
+
+This structure is used directly for routing. Each level aggregates experts by domain.
+
+### 3.5 Hierarchical Bloom-Filter Routing
+
+Each level holds a Bloom filter over the prefixes of the next level. Queries are filtered level by level, reducing candidate sets from 10⁷ to <20 in 5 levels.
+
+---
+
+## 4. Comparison with Existing Systems
+
+| Aspect | DeepSeek-V3 | Mixtral 8x7B | NeuralMesh |
+|--------|-------------|--------------|------------|
+| Experts | 256 | 8 | 10¹²+ |
+| Total parameters | 671B | 46B | 2×10¹² B |
+| Active per token | 37B | 12B | 4B |
+| Routing | learned | learned | Bloom + IPv6 |
+| Hosting | central | central | decentralized |
+| Scaling | vertical | vertical | horizontal |
+| Interpretability | low | low | high |
+| Access | closed | open weights | open |
+
+---
+
+## 5. Open Challenges
+
+1. **Training**: How to train billions of specialized experts automatically.
+2. **Quality assurance**: How to verify expert quality without central authority.
+3. **Heterogeneity**: Experts differ in quality, hardware, availability.
+4. **Latency**: Slowest expert determines total latency.
+5. **Security**: Decentralized experts are vulnerable to Sybil attacks.
+6. **Economics**: Micropayments for inference are not established.
+7. **Governance**: Who decides what experts are allowed?
+
+---
+
+## 6. Roadmap Summary
+
+| Phase | Goal | Duration |
+|-------|------|----------|
+| 1 | Concept & community | ongoing |
+| 2 | Proof of concept (10–100 experts) | 6 months |
+| 3 | Empirical evaluation | 6 months |
+| 4 | Standardization (IETF) | 12 months |
+| 5 | Production | 24+ months |
+
+---
+
+## 7. Conclusion
+
+NeuralMesh is a **conceptual architecture** for decentralized MoE over IPv6. It combines proven building blocks (MoE, Bloom filters, IPv6 multicast, anycast) in a novel way. The architecture is scalable, interpretable, and open. Empirical validation is pending.
+
+We invite researchers, engineers, and enthusiasts to collaborate.
+
+---
+
+## References
+
+See `README.md` for the full reference list.
