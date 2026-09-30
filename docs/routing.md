@@ -63,11 +63,13 @@ f_opt = (0.6185)^(m/n)
 
 ### 2.4 Example
 
+```
 For n = 10⁷ elements and m/n = 10 bits/element:
 
 - k_opt ≈ 7
 - f_opt ≈ 0.008 (0.8%)
 - Memory: 12.5 MB
+```
 
 ---
 
