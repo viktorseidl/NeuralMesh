@@ -1,0 +1,23 @@
+[package]
+name = "neuralmesh-router"
+version = "0.1.0"
+edition = "2021"
+description = "OD-IPV6-BF-Router"
+license = "MIT"
+
+[dependencies]
+xxhash-rust = { version = "0.8", features = ["xxh3"] }
+rayon = "1.10"
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "router"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
